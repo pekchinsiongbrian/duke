@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class Duke {
 
         textFormatAndPrint("Hello! I'm Duke\n\tWhat can I do for you?");
 
-        ArrayList<Task> list = new ArrayList<Task>();
+        ArrayList<Task> list = new ArrayList<>();
         boolean continueLoop = true;
 
         while (continueLoop) {
@@ -27,6 +28,7 @@ public class Duke {
                             throw new DukeException("Use: todo <description>");
                         } else {
                             list.add(createNewTask(userInput, list));
+                            save(list);
                             break;
                         }
                     case "DEADLINE":
@@ -47,6 +49,7 @@ public class Duke {
                                     "\nUse: deadline <task> /by <deadline>");
                         } else {
                             list.add(createNewTask(userInput, list));
+                            save(list);
                             break;
                         }
                     case "EVENT":
@@ -68,6 +71,7 @@ public class Duke {
                                     "\nUse: event <desc> /at <day/date/time>");
                         } else {
                             list.add(createNewTask(userInput, list));
+                            save(list);
                             break;
                         }
                     case "DONE":
@@ -86,6 +90,7 @@ public class Duke {
                                     t.markAsDone();
                                     String toPrint = "Nice! I've marked this task as done:\n\t\t" + t.toString();
                                     textFormatAndPrint(toPrint);
+                                    save(list);
                                     break;
                                 }
                             } catch (NumberFormatException e) {
@@ -110,6 +115,7 @@ public class Duke {
                                             "\n\tNow you have " + (list.size() - 1) + " tasks in the list.";
                                     textFormatAndPrint(toPrint);
                                     list.remove(Integer.parseInt(userInputSplit[1]) - 1);
+                                    save(list);
                                     break;
                                 }
                             } catch (NumberFormatException e) {
@@ -177,5 +183,21 @@ public class Duke {
 
     public static void textFormatAndPrint(String text) {
         System.out.println(HORIZONTAL_LINE + "\n\t" + text + "\n" + HORIZONTAL_LINE);
+    }
+
+    public static void save(ArrayList<Task> list) {
+        String home = System.getProperty("user.home");
+
+        File f = new File(home + "/Downloads/Y2S2/CS2103T - Software Engineering/duke-master/task-list.txt");
+        try {
+            OutputStream outputStream = new FileOutputStream(f);
+            for (int i = 0; i < list.size(); i++) {
+                String toWrite = (i + 1) + ". " + list.get(i) + "\n";
+                outputStream.write(toWrite.getBytes());
+            }
+        } catch (IOException ioe) {
+            System.err.println(ioe.getMessage());
+            System.err.println("Failed to save list");
+        }
     }
 }
