@@ -106,5 +106,4 @@ public class Ui {
     public void showBottomLine() {
         System.out.println("\t________________________________________________________________________________\n");
     }
-
 }
