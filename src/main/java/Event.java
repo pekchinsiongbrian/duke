@@ -47,17 +47,17 @@ public class Event extends Task {
     public String displayEventTime() {
         try {
             if (this.atTimeStart == null) {
-                return "[E]" + super.toString() + " (by: " +
+                return "[E]" + super.toString() + " (at: " +
                         this.atDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ") - " +
                         LocalDate.now().datesUntil(this.atDate).count() + " day(s) to go!";
             } else {
                 if (this.atTimeEnd == null) {
-                    return "[E]" + super.toString() + " (by: " +
+                    return "[E]" + super.toString() + " (at: " +
                             this.atDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) +
                             ", " + this.atTimeStart.format(DateTimeFormatter.ofPattern("HH:mm")) + ") - " +
                             LocalDate.now().datesUntil(this.atDate).count() + " day(s) to go!";
                 } else {
-                    return "[E]" + super.toString() + " (by: " +
+                    return "[E]" + super.toString() + " (at: " +
                             this.atDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) +
                             ", " + this.atTimeStart.format(DateTimeFormatter.ofPattern("HH:mm")) +
                             " to " + this.atTimeEnd.format(DateTimeFormatter.ofPattern("HH:mm")) + ") - " +
@@ -66,17 +66,17 @@ public class Event extends Task {
             }
         } catch (IllegalArgumentException iae) {
             if (this.atTimeStart == null) {
-                return "[E]" + super.toString() + " (by: " +
+                return "[E]" + super.toString() + " (at: " +
                         this.atDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ") - " +
                         "it's " + this.atDate.datesUntil(LocalDate.now()).count() + " day(s) past the event!";
             } else {
                 if (this.atTimeEnd == null) {
-                    return "[E]" + super.toString() + " (by: " +
+                    return "[E]" + super.toString() + " (at: " +
                             this.atDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) +
                             ", " + this.atTimeStart.format(DateTimeFormatter.ofPattern("HH:mm")) + ") - " +
                             "it's " + this.atDate.datesUntil(LocalDate.now()).count() + " day(s) past the event!";
                 } else {
-                    return "[E]" + super.toString() + " (by: " +
+                    return "[E]" + super.toString() + " (at: " +
                             this.atDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) +
                             ", " + this.atTimeStart.format(DateTimeFormatter.ofPattern("HH:mm")) +
                             " to " + this.atTimeEnd.format(DateTimeFormatter.ofPattern("HH:mm")) + ") - " +
