@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -173,6 +175,8 @@ public class Parser {
                 return new String[]{desc, atComponents[0]};
             } else if (atComponents.length == 2) {
                 // Case: event <desc> /at <YYYY-MM-DD of event> <start HH:mm>
+                LocalDate.parse(atComponents[0]);
+                LocalTime.parse(atComponents[1]);
                 return new String[]{desc, atComponents[0], atComponents[1]};
             } else if (atComponents.length == 4) {
                 // Case: event <desc> /at <YYYY-MM-DD of event> <start HH:mm> to <end HH:mm>

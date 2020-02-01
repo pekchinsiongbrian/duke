@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,7 +20,7 @@ public class Ui {
     // Prints goodbye message after user calls 'bye' to close the app
     public void showGoodbye() {
         showTopLine();
-        System.out.println("\tGoodbye! Hope to see you again soon!");
+        System.out.println("\tGoodbye! See you again soon!");
         showBottomLine();
     }
 
