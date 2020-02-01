@@ -1,10 +1,12 @@
-package duke;
+package duke.main;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import duke.DukeException;
+import duke.task.Task;
 
 public class Storage {
     protected String filePath;

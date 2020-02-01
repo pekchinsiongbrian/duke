@@ -1,4 +1,10 @@
-package duke;
+package duke.command;
+
+import duke.task.Todo;
+import duke.main.TaskList;
+import duke.main.Ui;
+import duke.main.Storage;
+import duke.DukeException;
 
 public class TodoCommand extends Command {
     String todoDesc;

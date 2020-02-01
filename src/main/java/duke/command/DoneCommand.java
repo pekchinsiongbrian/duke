@@ -1,4 +1,10 @@
-package duke;
+package duke.command;
+
+import duke.main.TaskList;
+import duke.main.Ui;
+import duke.main.Storage;
+import duke.DukeException;
+import duke.task.Task;
 
 public class DoneCommand extends Command {
     private int doneIndex;

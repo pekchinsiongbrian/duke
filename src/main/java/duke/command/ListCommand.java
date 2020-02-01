@@ -1,4 +1,9 @@
-package duke;
+package duke.command;
+
+import duke.main.TaskList;
+import duke.main.Ui;
+import duke.main.Storage;
+import duke.DukeException;
 
 public class ListCommand extends Command {
     private String listCommand;
@@ -10,7 +15,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.getTaskList().isEmpty()) {
             // List is empty
             if (!listCommand.equals("")) {

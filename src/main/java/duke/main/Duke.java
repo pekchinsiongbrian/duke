@@ -1,4 +1,7 @@
-package duke;
+package duke.main;
+
+import duke.DukeException;
+import duke.command.*;
 
 public class Duke {
     private Storage storage;
