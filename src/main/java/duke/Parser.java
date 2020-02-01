@@ -9,29 +9,28 @@ import java.util.Arrays;
 
 public class Parser {
 
-    private static final String EVENT_USE = "Use: 1) event <desc> /at <YYYY-MM-DD of event>" +
+    private final String EVENT_USE = "Use: 1) event <desc> /at <YYYY-MM-DD of event>" +
             "\n2) event <desc> /at <YYYY-MM-DD of event> <start HH:mm>" +
             "\n3) event <desc> /at <YYYY-MM-DD of event> <start HH:mm> to <end HH:mm>" +
             "\nNote: Input time in 24h format.";
 
-    private static final String DEADLINE_USE = "Use: 1) deadline <task> /by <YYYY-MM-DD of deadline>" +
+    private final String DEADLINE_USE = "Use: 1) deadline <task> /by <YYYY-MM-DD of deadline>" +
             "\n2) deadline <task> /by <YYYY-MM-DD of deadline> <HH:mm>" +
             "\nNote: Input time in 24h format.";
 
-    private static final String TODO_USE = "Use: todo <description>";
+    private final String TODO_USE = "Use: todo <description>";
 
-    private static final String DONE_USE = "Use: done <index of item to mark as done>";
+    private final String DONE_USE = "Use: done <index of item to mark as done>";
 
-    private static final String DELETE_USE = "Use: delete <index of item to delete>";
+    private final String DELETE_USE = "Use: delete <index of item to delete>";
 
-    private static final String LIST_USE = "Use: 1) list (displays list with current settings)" +
+    private final String LIST_USE = "Use: 1) list (displays list with current settings)" +
             "\n2) list /showtimer (displays list with timer toggled on)" +
             "\n3) list /hidetimer (displays list with timer toggled off)";
 
-    public static String getCommandType(String userInput, TaskList list) throws DukeException {
+    public String getCommandType(String userInput, TaskList list) throws DukeException {
         String[] userInputSplit = userInput.toLowerCase().split(" ");
         String firstWord = userInputSplit[0].toUpperCase();
-
         switch(firstWord) {
             case "/HELP":
                 if (userInputSplit.length > 1) {
@@ -136,11 +135,34 @@ public class Parser {
         }
     }
 
-    public static String parseTodoCommand(String userInput) {
-        return userInput.substring(5);
+    public Command selectCommand(String commandType, String userInput, boolean isTimerOn) throws DukeException {
+        switch(commandType) {
+            case "/HELP":
+                return new HelpCommand();
+            case "TODO":
+                return parseTodoCommand(userInput);
+            case "DEADLINE":
+                return parseDeadlineCommand(userInput);
+            case "EVENT":
+                return parseEventCommand(userInput);
+            case "DONE":
+                return parseDoneCommand(userInput);
+            case "DELETE":
+                return parseDeleteCommand(userInput);
+            case "LIST":
+                return parseListCommand(userInput, isTimerOn);
+            case "BYE":
+                return new ByeCommand();
+            default:
+                throw new DukeException("Invalid command!\nFor list of commands, type: /help");
+        }
     }
 
-    public static String[] parseDeadlineCommand(String userInput) throws DukeException {
+    public TodoCommand parseTodoCommand(String userInput) {
+        return new TodoCommand(userInput.substring(5));
+    }
+
+    public DeadlineCommand parseDeadlineCommand(String userInput) throws DukeException {
         String desc = userInput.substring(9, userInput.toLowerCase().indexOf("/by") - 1);
         String by = userInput.substring(userInput.indexOf("/by") + 4);
         String[] byComponents = by.split(" ");
@@ -148,12 +170,12 @@ public class Parser {
             if (byComponents.length == 1) {
                 // Case: deadline <task> /by <YYYY-MM-DD of deadline>
                 LocalDate.parse(byComponents[0]);
-                return new String[]{desc, byComponents[0]};
+                return new DeadlineCommand(new String[]{desc, byComponents[0]});
             } else if (byComponents.length == 2) {
                 // Case: deadline <task> /by <YYYY-MM-DD of deadline> <HH:mm>
                 LocalDate.parse(byComponents[0]);
                 LocalTime.parse(byComponents[1]);
-                return new String[]{desc, byComponents[0], byComponents[1]};
+                return new DeadlineCommand(new String[]{desc, byComponents[0], byComponents[1]});
             } else {
                 throw new DukeException(DEADLINE_USE);
             }
@@ -164,7 +186,7 @@ public class Parser {
         }
     }
 
-    public static String[] parseEventCommand(String userInput) throws DukeException {
+    public EventCommand parseEventCommand(String userInput) throws DukeException {
         try {
             String desc = userInput.substring(6, userInput.toLowerCase().indexOf("/at") - 1);
             String at = userInput.substring(userInput.indexOf("/at") + 4);
@@ -172,12 +194,12 @@ public class Parser {
             if (atComponents.length == 1) {
                 // Case: event <desc> /at <YYYY-MM-DD of event>
                 LocalDate.parse(atComponents[0]);
-                return new String[]{desc, atComponents[0]};
+                return new EventCommand(new String[]{desc, atComponents[0]});
             } else if (atComponents.length == 2) {
                 // Case: event <desc> /at <YYYY-MM-DD of event> <start HH:mm>
                 LocalDate.parse(atComponents[0]);
                 LocalTime.parse(atComponents[1]);
-                return new String[]{desc, atComponents[0], atComponents[1]};
+                return new EventCommand(new String[]{desc, atComponents[0], atComponents[1]});
             } else if (atComponents.length == 4) {
                 // Case: event <desc> /at <YYYY-MM-DD of event> <start HH:mm> to <end HH:mm>
                 if (!atComponents[2].toLowerCase().equals("to")) {
@@ -187,7 +209,7 @@ public class Parser {
                     LocalDate.parse(atComponents[0]);
                     LocalTime.parse(atComponents[1]);
                     LocalTime.parse(atComponents[3]);
-                    return new String[]{desc, atComponents[0], atComponents[1], atComponents[3]};
+                    return new EventCommand(new String[]{desc, atComponents[0], atComponents[1], atComponents[3]});
                 }
             } else {
                 throw new DukeException(EVENT_USE);
@@ -199,26 +221,26 @@ public class Parser {
         }
     }
 
-    public static String parseListCommand(String userInput) {
+    public ListCommand parseListCommand(String userInput, boolean isTimerOn) {
         String[] userInputSplit = userInput.toLowerCase().split(" ");
         if (userInputSplit.length == 2) {
-            return userInputSplit[1];
+            return new ListCommand(userInputSplit[1], isTimerOn);
         } else {
-            return "";
+            return new ListCommand("", isTimerOn);
         }
     }
 
-    public static int parseDeleteCommand(String userInput) {
+    public DeleteCommand parseDeleteCommand(String userInput) {
         String[] userInputSplit = userInput.toLowerCase().split(" ");
-        return Integer.parseInt(userInputSplit[1]);
+        return new DeleteCommand(Integer.parseInt(userInputSplit[1]));
     }
 
-    public static int parseDoneCommand(String userInput) {
+    public DoneCommand parseDoneCommand(String userInput) {
         String[] userInputSplit = userInput.toLowerCase().split(" ");
-        return Integer.parseInt(userInputSplit[1]);
+        return new DoneCommand(Integer.parseInt(userInputSplit[1]));
     }
 
-    public static ArrayList<Task> parseSavedFile(ArrayList<String> list) {
+    public ArrayList<Task> parseSavedFile(ArrayList<String> list) {
         ArrayList<Task> parsedList = new ArrayList<>();
         if (list.size() != 0) {
             for (String s : list) {
@@ -319,5 +341,4 @@ public class Parser {
         }
         return parsedList;
     }
-
 }

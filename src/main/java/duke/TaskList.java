@@ -9,8 +9,8 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<String> list) {
-        this.taskList = Parser.parseSavedFile(list);
+    public TaskList(ArrayList<String> list, Parser parser) {
+        this.taskList = parser.parseSavedFile(list);
     }
 
     public void addToTaskList(Task t) {
