@@ -17,11 +17,12 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Executes the 'to-do' command.
+     * Executes the 'to-do' command and saves latest version of the task list.
      *
      * @param tasks Task list
      * @param ui Current user interface
      * @param storage Current storage
+     * @return String representation of success message after a task is added to the task list
      * @throws DukeException If task list fails to save
      */
     @Override

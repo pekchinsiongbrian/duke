@@ -32,8 +32,9 @@ public class Ui {
      * @return String representation of list of commands
      */
     public String showHelp() {
-        return "You called for help? Help is here! List of commands:"
-                + "\ttodo, deadline, event, done, delete, list, find, bye";
+        return "You called for help? Help is here!\nList of commands:"
+                + "\n\ntodo, deadline, event, done, delete, list, find, bye"
+                + "\n\nEnter any command to see its use";
     }
 
     /**
@@ -116,7 +117,7 @@ public class Ui {
      * Turns on countdown timer and generates task list for find command.
      *
      * @param list Task list
-     * @return String representation of a list consisting of tasks that contain the keyword (with countdown timer)
+     * @return String representation of a list consisting of tasks that contain the keyword(s) (with countdown timer)
      */
     public String showFindListTimerOn(ArrayList<Task> list) {
         StringBuilder sb = new StringBuilder();
@@ -144,7 +145,7 @@ public class Ui {
      * Turns off countdown timer and generates task list for find command.
      *
      * @param list Task list
-     * @return String representation of a list consisting of tasks that contain the keyword (without countdown timer)
+     * @return String representation of a list consisting of tasks that contain the keyword(s) (without countdown timer)
      */
     public String showFindListTimerOff(ArrayList<Task> list) {
         StringBuilder sb = new StringBuilder();
@@ -169,7 +170,6 @@ public class Ui {
     public String showEmptyListMessage() {
         return "\tHere are the tasks in your list:\n\n\tYou have no tasks "
                 + "right now.\n\tUse 'todo', 'deadline', or 'event' to add task!";
-
     }
 
     /**

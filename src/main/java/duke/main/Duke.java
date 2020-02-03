@@ -3,8 +3,6 @@ package duke.main;
 import duke.DukeException;
 import duke.command.*;
 
-import javafx.scene.control.Label;
-
 /**
  * Main class of the duke programme.
  */

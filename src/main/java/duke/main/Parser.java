@@ -15,24 +15,26 @@ import duke.task.*;
  */
 public class Parser {
 
-    private final String EVENT_USE = "Use: 1) event <desc> /at <YYYY-MM-DD of event>"
+    private final String EVENT_USE = "Use:\n1) event <desc> /at <YYYY-MM-DD of event>"
             + "\n2) event <desc> /at <YYYY-MM-DD of event> <start HH:mm>"
             + "\n3) event <desc> /at <YYYY-MM-DD of event> <start HH:mm> to <end HH:mm>"
             + "\n\nNote: Input time in 24h format.";
 
-    private final String DEADLINE_USE = "Use: 1) deadline <task> /by <YYYY-MM-DD of deadline>"
+    private final String DEADLINE_USE = "Use:\n1) deadline <task> /by <YYYY-MM-DD of deadline>"
             + "\n2) deadline <task> /by <YYYY-MM-DD of deadline> <HH:mm>"
             + "\n\nNote: Input time in 24h format.";
 
     private final String TODO_USE = "Use: todo <description>";
 
-    private final String DONE_USE = "Use: done <index of item to mark as done>";
+    private final String DONE_USE = "Use:\ndone <index of item to mark as done>";
 
-    private final String DELETE_USE = "Use: delete <index of item to delete>";
+    private final String DELETE_USE = "Use:\ndelete <index of item to delete>";
 
-    private final String LIST_USE = "Use: 1) list (displays list with current settings)"
+    private final String LIST_USE = "Use:\n1) list (displays list with current settings)"
             + "\n2) list /showtimer (displays list with timer toggled on)"
             + "\n3) list /hidetimer (displays list with timer toggled off)";
+
+    private final String FIND_USE = "Use:\nfind <keyword(s)>";
 
     /**
      * Checks the validity of the user input and returns the command type.
@@ -64,16 +66,16 @@ public class Parser {
             if (userInputSplit.length == 1) {
                 throw new DukeException(DEADLINE_USE);
             } else if (!userInput.toLowerCase().contains("/by")) {
-                throw new DukeException("Please use the '/by' keyword to specify a deadline.\n"
+                throw new DukeException("Please use the '/by' keyword to specify a deadline.\n\n"
                         + DEADLINE_USE);
             } else if (userInputSplit[1].equals("/by")) {
-                throw new DukeException("Please enter a task.\n" + DEADLINE_USE);
+                throw new DukeException("Please enter a task.\n\n" + DEADLINE_USE);
             } else if (Arrays.asList(userInputSplit).indexOf("/by")
                     == Arrays.asList(userInputSplit).size() - 1) {
-                throw new DukeException("Please enter a deadline for the task.\n" + DEADLINE_USE);
+                throw new DukeException("Please enter a deadline for the task.\n\n" + DEADLINE_USE);
             } else if (Arrays.asList(userInputSplit).indexOf("/by")
                     != Arrays.asList(userInputSplit).lastIndexOf("/by")) {
-                throw new DukeException("Only one '/by' keyword can be used!\n" + DEADLINE_USE);
+                throw new DukeException("Only one '/by' keyword can be used!\n\n" + DEADLINE_USE);
             } else {
                 return firstWord;
             }
@@ -82,16 +84,16 @@ public class Parser {
             if (userInputSplit.length == 1) {
                 throw new DukeException(EVENT_USE);
             } else if (!userInput.toLowerCase().contains("/at")) {
-                throw new DukeException("Please use the '/at' keyword to specify the event date/time.\n"
+                throw new DukeException("Please use the '/at' keyword to specify the event date/time.\n\n"
                         + EVENT_USE);
             } else if (userInputSplit[1].equals("/at")) {
-                throw new DukeException("The description of an event cannot be empty.\n" + EVENT_USE);
+                throw new DukeException("The description of an event cannot be empty.\n\n" + EVENT_USE);
             } else if (Arrays.asList(userInputSplit).indexOf("/at")
                     == Arrays.asList(userInputSplit).size() - 1) {
-                throw new DukeException("Please enter the event date/time.\n" + EVENT_USE);
+                throw new DukeException("Please enter the event date/time.\n\n" + EVENT_USE);
             } else if (Arrays.asList(userInputSplit).indexOf("/at")
                     != Arrays.asList(userInputSplit).lastIndexOf("/at")) {
-                throw new DukeException("Only one '/at' keyword can be used!\n" + EVENT_USE);
+                throw new DukeException("Only one '/at' keyword can be used!\n\n" + EVENT_USE);
             } else {
                 return firstWord;
             }
@@ -99,36 +101,36 @@ public class Parser {
         case "DONE":
             if (userInputSplit.length != 2) {
                 throw new DukeException("Enter index of item to mark it as done. "
-                        + "Type 'list' to see all items.\n" + DONE_USE);
+                        + "Type 'list' to see all items.\n\n" + DONE_USE);
             } else {
                 try {
                     if (Integer.parseInt(userInputSplit[1]) <= 0) {
-                        throw new DukeException("Argument must be a positive integer.\n" + DONE_USE);
+                        throw new DukeException("Argument must be a positive integer.\n\n" + DONE_USE);
                     } else if (Integer.parseInt(userInputSplit[1]) > list.getTaskList().size()) {
-                        throw new DukeException("Argument exceeds number of items on the list!\n" + DONE_USE);
+                        throw new DukeException("Argument exceeds number of items on the list!\n\n" + DONE_USE);
                     } else {
                         return firstWord;
                     }
                 } catch (NumberFormatException e) {
-                    throw new DukeException("Argument must be a positive integer.\n" + DONE_USE);
+                    throw new DukeException("Argument must be a positive integer.\n\n" + DONE_USE);
                 }
             }
             //Fallthrough
         case "DELETE":
             if (userInputSplit.length != 2) {
                 throw new DukeException("Enter index of item to delete it. "
-                        + "Type 'list' to see all items.\n");
+                        + "Type 'list' to see all items.\n\n" + DELETE_USE);
             } else {
                 try {
                     if (Integer.parseInt(userInputSplit[1]) <= 0) {
-                        throw new DukeException("Argument must be a positive integer.\n" + DELETE_USE);
+                        throw new DukeException("Argument must be a positive integer.\n\n" + DELETE_USE);
                     } else if (Integer.parseInt(userInputSplit[1]) > list.getTaskList().size()) {
-                        throw new DukeException("Argument exceeds number of items on the list!\n" + DELETE_USE);
+                        throw new DukeException("Argument exceeds number of items on the list!\n\n" + DELETE_USE);
                     } else {
                         return firstWord;
                     }
                 } catch (NumberFormatException e) {
-                    throw new DukeException("Argument must be a positive integer.\n" + DELETE_USE);
+                    throw new DukeException("Argument must be a positive integer.\n\n" + DELETE_USE);
                 }
             }
             //Fallthrough
@@ -154,7 +156,7 @@ public class Parser {
             //Fallthrough
         case "FIND":
             if (userInputSplit.length == 1) {
-                throw new DukeException("Enter a keyword to search!");
+                throw new DukeException("Enter a keyword to search!\n" + FIND_USE);
             } else {
                 return firstWord;
             }
@@ -244,9 +246,7 @@ public class Parser {
                 throw new DukeException(DEADLINE_USE);
             }
         } catch (DateTimeParseException dtpe) {
-            throw new DukeException("Error reading date and/or time."
-                    + "\nPlease enter date in the format: YYYY-MM-DD (with dashes),"
-                    + "\nand time (if applicable) in the format: HH:mm (with colon).");
+            throw new DukeException("Error reading date and/or time.\n\n" + DEADLINE_USE);
         }
     }
 
@@ -286,9 +286,7 @@ public class Parser {
                 throw new DukeException(EVENT_USE);
             }
         } catch (DateTimeParseException dtpe) {
-            throw new DukeException("Error reading date and/or time."
-                    + "\nPlease enter date in the format: YYYY-MM-DD (with dashes),"
-                    + "\nand time (if applicable) in the format: HH:mm (with colon).");
+            throw new DukeException("Error reading date and/or time.\n\n" + EVENT_USE);
         }
     }
 

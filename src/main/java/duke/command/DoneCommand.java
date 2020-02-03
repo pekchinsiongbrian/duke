@@ -17,11 +17,12 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the 'done' command.
+     * Executes the 'done' command and saves latest version of the task list.
      *
      * @param tasks Task list
      * @param ui Current user interface
      * @param storage Current storage
+     * @return String representation of success message after task is marked as done
      * @throws DukeException If task list fails to save
      */
     @Override

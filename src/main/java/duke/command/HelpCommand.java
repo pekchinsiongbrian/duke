@@ -16,6 +16,7 @@ public class HelpCommand extends Command {
      * @param tasks Task list
      * @param ui Current user interface
      * @param storage Current storage
+     * @return String representation of list of commands
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

@@ -17,11 +17,12 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the 'delete' command.
+     * Executes the 'delete' command and saves latest version of the task list.
      *
      * @param tasks Task list
      * @param ui Current user interface
      * @param storage Current storage
+     * @return String representation of success message after task is deleted
      * @throws DukeException If task list fails to save
      */
     @Override

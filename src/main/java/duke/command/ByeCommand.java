@@ -11,11 +11,12 @@ import duke.DukeException;
 public class ByeCommand extends Command {
 
     /**
-     * Executes the 'bye' command.
+     * Executes the 'bye' command and saves latest version of the task list.
      *
      * @param tasks Task list
      * @param ui Current user interface
      * @param storage Current storage
+     * @return String representation of goodbye message
      * @throws DukeException If task list fails to save
      */
     @Override

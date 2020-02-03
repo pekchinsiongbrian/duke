@@ -19,11 +19,12 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Executes the 'deadline' command.
+     * Executes the 'deadline' command and saves latest version of the task list.
      *
      * @param tasks Task list
      * @param ui Current user interface
      * @param storage Current storage
+     * @return String representation of success message after a deadline is added to the task list
      * @throws DukeException If task list fails to save
      */
     @Override

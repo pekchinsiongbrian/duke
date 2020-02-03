@@ -19,11 +19,12 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Executes the 'event' command.
+     * Executes the 'event' command and saves latest version of the task list.
      *
      * @param tasks Task list
      * @param ui Current user interface
      * @param storage Current storage
+     * @return String representation of success message after an event is added to the task list
      * @throws DukeException If task list fails to save
      */
     @Override
