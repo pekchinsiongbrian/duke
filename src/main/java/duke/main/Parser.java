@@ -152,6 +152,13 @@ public class Parser {
                 return firstWord;
             }
             //Fallthrough
+        case "FIND":
+            if (userInputSplit.length == 1) {
+                throw new DukeException("Enter a keyword to search!");
+            } else {
+                return firstWord;
+            }
+            //Fallthrough
         default:
             throw new DukeException("Invalid command!\nFor list of commands, type: /help");
             //Fallthrough
@@ -192,6 +199,9 @@ public class Parser {
             //Fallthrough
         case "BYE":
             return new ByeCommand();
+            //Fallthrough
+        case "FIND":
+            return parseFindCommand(userInput, isTimerOn);
             //Fallthrough
         default:
             throw new DukeException("Invalid command!\nFor list of commands, type: /help");
@@ -318,6 +328,17 @@ public class Parser {
     public DoneCommand parseDoneCommand(String userInput) {
         String[] userInputSplit = userInput.toLowerCase().split(" ");
         return new DoneCommand(Integer.parseInt(userInputSplit[1]));
+    }
+
+    /**
+     * Parses user input and returns a find command if user input is valid.
+     *
+     * @param userInput User input
+     * @param isTimerOn Whether the user has set timer on or timer off
+     * @return FindCommand
+     */
+    public FindCommand parseFindCommand(String userInput, boolean isTimerOn) {
+        return new FindCommand(userInput.substring(5), isTimerOn);
     }
 
     /**

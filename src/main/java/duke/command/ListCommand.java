@@ -3,7 +3,6 @@ package duke.command;
 import duke.main.TaskList;
 import duke.main.Ui;
 import duke.main.Storage;
-import duke.DukeException;
 
 /**
  * Command that is executed when user inputs 'list'.

@@ -38,7 +38,7 @@ public class Ui {
     public void showHelp() {
         showTopLine();
         System.out.println("\tYou called for help? Help is here! List of commands:"
-                + "\n\ttodo, deadline, event, done, delete, list, bye");
+                + "\n\ttodo, deadline, event, done, delete, list, find, bye");
         showBottomLine();
     }
 
@@ -80,7 +80,7 @@ public class Ui {
     }
 
     /**
-     * Turns on countdown timer and prints out task list.
+     * Turns on countdown timer and prints out task list for list command.
      *
      * @param list Task list
      */
@@ -101,7 +101,7 @@ public class Ui {
     }
 
     /**
-     * Turns off countdown timer and prints out task list.
+     * Turns off countdown timer and prints out task list for list command.
      *
      * @param list Task list
      */
@@ -112,6 +112,49 @@ public class Ui {
             System.out.println("\t" + (i + 1) + "." + list.get(i));
         }
         System.out.println("\n\tTip: Try using 'list /showtimer' or list '/hidetimer'!");
+        showBottomLine();
+    }
+
+    /**
+     * Turns on countdown timer and prints out task list for find command.
+     *
+     * @param list Task list
+     */
+    public void showFindListTimerOn(ArrayList<Task> list) {
+        showTopLine();
+        System.out.println("\tHere are the matching tasks in your list:");
+        if (list.isEmpty()) {
+            System.out.println("\t\tNo matches found!");
+        }
+        else {
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i) instanceof Deadline) {
+                    System.out.println("\t" + (i + 1) + "." + ((Deadline) list.get(i)).displayDeadline());
+                } else if (list.get(i) instanceof Event) {
+                    System.out.println("\t" + (i + 1) + "." + ((Event) list.get(i)).displayEventTime());
+                } else {
+                    System.out.println("\t" + (i + 1) + "." + list.get(i));
+                }
+            }
+        }
+        showBottomLine();
+    }
+
+    /**
+     * Turns off countdown timer and prints out task list for find command.
+     *
+     * @param list Task list
+     */
+    public void showFindListTimerOff(ArrayList<Task> list) {
+        showTopLine();
+        System.out.println("\tHere are the matching tasks in your list:");
+        if (list.isEmpty()) {
+            System.out.println("\t\tNo matches found!");
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println("\t" + (i + 1) + "." + list.get(i));
+            }
+        }
         showBottomLine();
     }
 

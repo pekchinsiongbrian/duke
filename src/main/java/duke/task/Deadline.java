@@ -42,13 +42,13 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        if (this.byTime == null) {
+        if (byTime == null) {
             return "[D]" + super.toString() + " (by: "
-                    + this.byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
+                    + byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
         } else {
             return "[D]" + super.toString() + " (by: "
-                    + this.byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
-                    + ", " + this.byTime.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
+                    + byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                    + ", " + byTime.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
         }
     }
 
@@ -60,26 +60,26 @@ public class Deadline extends Task {
      */
     public String displayDeadline() {
         try {
-            if (this.byTime == null) {
+            if (byTime == null) {
                 return "[D]" + super.toString() + " (by: "
-                        + this.byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ") - "
-                        + LocalDate.now().datesUntil(this.byDate).count() + " day(s) to go!";
+                        + byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ") - "
+                        + LocalDate.now().datesUntil(byDate).count() + " day(s) to go!";
             } else {
                 return "[D]" + super.toString() + " (by: "
-                        + this.byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
-                        + ", " + this.byTime.format(DateTimeFormatter.ofPattern("HH:mm")) + ") - "
-                        + LocalDate.now().datesUntil(this.byDate).count() + " day(s) to go!";
+                        + byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                        + ", " + byTime.format(DateTimeFormatter.ofPattern("HH:mm")) + ") - "
+                        + LocalDate.now().datesUntil(byDate).count() + " day(s) to go!";
             }
         } catch (IllegalArgumentException iae) {
-            if (this.byTime == null) {
+            if (byTime == null) {
                 return "[D]" + super.toString() + " (by: "
-                        + this.byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ") - "
-                        + "it's " + this.byDate.datesUntil(LocalDate.now()).count() + " day(s) past the deadline!";
+                        + byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ") - "
+                        + "it's " + byDate.datesUntil(LocalDate.now()).count() + " day(s) past the deadline!";
             } else {
                 return "[D]" + super.toString() + " (by: "
-                        + this.byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
-                        + ", " + this.byTime.format(DateTimeFormatter.ofPattern("HH:mm")) + ") - "
-                        + "it's " + this.byDate.datesUntil(LocalDate.now()).count() + " day(s) past the deadline!";
+                        + byDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
+                        + ", " + byTime.format(DateTimeFormatter.ofPattern("HH:mm")) + ") - "
+                        + "it's " + byDate.datesUntil(LocalDate.now()).count() + " day(s) past the deadline!";
             }
         }
     }

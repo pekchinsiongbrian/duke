@@ -25,7 +25,7 @@ public class Task {
      * Marks a task as done by changing its isDone status.
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -34,7 +34,7 @@ public class Task {
      * @return Status of the task
      */
     public boolean getStatus() {
-        return this.isDone;
+        return isDone;
     }
 
     /**
@@ -44,6 +44,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "] " + description;
     }
 }
