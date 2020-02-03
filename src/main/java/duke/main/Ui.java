@@ -2,201 +2,183 @@ package duke.main;
 
 import duke.task.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Deals with interactions with the user.
  */
 public class Ui {
-    private Scanner sc;
-
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
 
     /**
-     * Prints welcome message when user first enters app.
+     * Generates welcome message when user first enters app.
+     *
+     * @return String representation of welcome message
      */
-    public void showWelcome() {
-        showTopLine();
-        System.out.println("\tHello! I'm Brian-bot\n\tWhat can I do for you?");
-        showBottomLine();
+    public static String showWelcome() {
+        return "Hello! I'm Brian-bot :)\nWhat can I do for you?\nFor list of commands, type: /help";
     }
 
     /**
-     * Prints goodbye message after user calls 'bye' to close the app.
+     * Generates goodbye message after user calls 'bye' to close the app.
+     *
+     * @return String representation of goodbye message
      */
-    public void showGoodbye() {
-        showTopLine();
-        System.out.println("\tGoodbye! See you again soon!");
-        showBottomLine();
+    public String showGoodbye() {
+        return "Goodbye! See you again soon! :)";
     }
 
     /**
-     * Prints this bare bones manual page when user calls '/help'.
+     * Generates this bare bones manual page when user calls '/help'.
+     *
+     * @return String representation of list of commands
      */
-    public void showHelp() {
-        showTopLine();
-        System.out.println("\tYou called for help? Help is here! List of commands:"
-                + "\n\ttodo, deadline, event, done, delete, list, find, bye");
-        showBottomLine();
+    public String showHelp() {
+        return "You called for help? Help is here! List of commands:"
+                + "\ttodo, deadline, event, done, delete, list, find, bye";
     }
 
     /**
-     * Prints this message after a task is marked as done.
+     * Generates this message after a task is marked as done.
      *
      * @param task Name of task to be marked as done
+     * @return String representation of success message after task is marked as done
      */
-    public void showDone(String task) {
-        showTopLine();
-        System.out.println("\tNice! I've marked this task as done:\n\t\t" + task);
-        showBottomLine();
+    public String showDone(String task) {
+        return "Nice! I've marked this task as done:\n\t" + task;
     }
 
     /**
-     * Prints this message after a task is deleted.
+     * Generates this message after a task is deleted.
      *
      * @param task Name of task to be deleted
      * @param sizeOfList Size of the task list after deletion
+     * @return String representation of success message after task is deleted
      */
-    public void showDelete(String task, int sizeOfList) {
-        showTopLine();
-        System.out.println("\tNoted. I've removed this task:\n\t\t" + task
-                + "\n\tNow you have " + sizeOfList + " tasks in the list.");
-        showBottomLine();
+    public String showDelete(String task, int sizeOfList) {
+        return "Noted. I've removed this task:\n\t" + task
+                + "\nNow you have " + sizeOfList + " tasks in the list.";
     }
 
     /**
-     * Prints this message after a to-do task, deadline, or event is added to the task list.
+     * Generates this message after a to-do task, deadline, or event is added to the task list.
      *
      * @param task Name of task that was added
      * @param sizeOfList Size of the task list after adding
+     * @return String representation of success message after a task is added to the task list
      */
-    public void showSuccessMessage(String task, int sizeOfList) {
-        showTopLine();
-        System.out.println("\tGot it. I've added this task:\n\t\t" + task + "\n\tNow you have "
-                + sizeOfList + " tasks in the list.");
-        showBottomLine();
+    public String showSuccessMessage(String task, int sizeOfList) {
+        return "Got it. I've added this task:\n\t" + task + "\nNow you have "
+                + sizeOfList + " tasks in the list.";
     }
 
     /**
-     * Turns on countdown timer and prints out task list for list command.
+     * Turns on countdown timer and generates task list for list command.
      *
      * @param list Task list
+     * @return String representation of task list with countdown timer
      */
-    public void showListTimerOn(ArrayList<Task> list) {
-        showTopLine();
-        System.out.println("\tHere are the tasks in your list:");
+    public String showListTimerOn(ArrayList<Task> list) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:");
+        String toAppend;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) instanceof Deadline) {
-                System.out.println("\t" + (i + 1) + "." + ((Deadline) list.get(i)).displayDeadline());
+                toAppend = "\n\t" + (i + 1) + ". " + ((Deadline) list.get(i)).displayDeadline();
             } else if (list.get(i) instanceof Event) {
-                System.out.println("\t" + (i + 1) + "." + ((Event) list.get(i)).displayEventTime());
+                toAppend = "\n\t" + (i + 1) + ". " + ((Event) list.get(i)).displayEventTime();
             } else {
-                System.out.println("\t" + (i + 1) + "." + list.get(i));
+                toAppend = "\n\t" + (i + 1) + ". " + list.get(i);
             }
+            sb.append(toAppend);
         }
-        System.out.println("\n\tTip: Try using 'list /showtimer' or list '/hidetimer'!");
-        showBottomLine();
+        sb.append("\n\nTip: Try using 'list /showtimer' or list '/hidetimer'!");
+        return sb.toString();
     }
 
     /**
-     * Turns off countdown timer and prints out task list for list command.
+     * Turns off countdown timer and generates task list for list command.
      *
      * @param list Task list
+     * @return String representation of task list without countdown timer
      */
-    public void showListTimerOff(ArrayList<Task> list) {
-        showTopLine();
-        System.out.println("\tHere are the tasks in your list:");
+    public String showListTimerOff(ArrayList<Task> list) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:");
+        String toAppend;
         for (int i = 0; i < list.size(); i++) {
-            System.out.println("\t" + (i + 1) + "." + list.get(i));
+            toAppend = "\n\t" + (i + 1) + ". " + list.get(i);
+            sb.append(toAppend);
         }
-        System.out.println("\n\tTip: Try using 'list /showtimer' or list '/hidetimer'!");
-        showBottomLine();
+        sb.append("\n\nTip: Try using 'list /showtimer' or list '/hidetimer'!");
+        return sb.toString();
     }
 
     /**
-     * Turns on countdown timer and prints out task list for find command.
+     * Turns on countdown timer and generates task list for find command.
      *
      * @param list Task list
+     * @return String representation of a list consisting of tasks that contain the keyword (with countdown timer)
      */
-    public void showFindListTimerOn(ArrayList<Task> list) {
-        showTopLine();
-        System.out.println("\tHere are the matching tasks in your list:");
+    public String showFindListTimerOn(ArrayList<Task> list) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:");
         if (list.isEmpty()) {
-            System.out.println("\t\tNo matches found!");
+            sb.append("\n\tNo matches found!");
         }
         else {
+            String toAppend;
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i) instanceof Deadline) {
-                    System.out.println("\t" + (i + 1) + "." + ((Deadline) list.get(i)).displayDeadline());
+                    toAppend = "\n\t" + (i + 1) + ". " + ((Deadline) list.get(i)).displayDeadline();
                 } else if (list.get(i) instanceof Event) {
-                    System.out.println("\t" + (i + 1) + "." + ((Event) list.get(i)).displayEventTime());
+                    toAppend = "\n\t" + (i + 1) + ". " + ((Event) list.get(i)).displayEventTime();
                 } else {
-                    System.out.println("\t" + (i + 1) + "." + list.get(i));
+                    toAppend = "\n\t" + (i + 1) + ". " + list.get(i);
                 }
+                sb.append(toAppend);
             }
         }
-        showBottomLine();
+        return sb.toString();
     }
 
     /**
-     * Turns off countdown timer and prints out task list for find command.
+     * Turns off countdown timer and generates task list for find command.
      *
      * @param list Task list
+     * @return String representation of a list consisting of tasks that contain the keyword (without countdown timer)
      */
-    public void showFindListTimerOff(ArrayList<Task> list) {
-        showTopLine();
-        System.out.println("\tHere are the matching tasks in your list:");
+    public String showFindListTimerOff(ArrayList<Task> list) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:");
         if (list.isEmpty()) {
-            System.out.println("\t\tNo matches found!");
+            sb.append("\n\tNo matches found!");
         } else {
+            String toAppend;
             for (int i = 0; i < list.size(); i++) {
-                System.out.println("\t" + (i + 1) + "." + list.get(i));
+                toAppend = "\n\t" + (i + 1) + ". " + list.get(i);
+                sb.append(toAppend);
             }
         }
-        showBottomLine();
+        return sb.toString();
     }
 
     /**
-     * Prints this message when task list is empty and user wants to view list.
+     * Generates this message when task list is empty and user wants to view list.
+     *
+     * @return String representation of an empty task list
      */
-    public void showEmptyListMessage() {
-        showTopLine();
-        System.out.println("\tHere are the tasks in your list:\n\n\tYou have no tasks "
-                + "right now.\n\tUse 'todo', 'deadline', or 'event' to add task!");
-        showBottomLine();
+    public String showEmptyListMessage() {
+        return "\tHere are the tasks in your list:\n\n\tYou have no tasks "
+                + "right now.\n\tUse 'todo', 'deadline', or 'event' to add task!";
+
     }
 
     /**
-     * Prints out error message.
+     * Generates error message.
      *
      * @param errorMessage Error message to display
+     * @return String representation of an error message
      */
-    public void showError(String errorMessage) {
-        System.err.println(errorMessage + "\n");
-    }
-
-    /**
-     * Reads the user input.
-     *
-     * @return User input as a string
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
-    /**
-     * Prints top border.
-     */
-    public void showTopLine() {
-        System.out.println("\t________________________________________________________________________________");
-    }
-
-    /**
-     * Prints bottom border.
-     */
-    public void showBottomLine() {
-        System.out.println("\t________________________________________________________________________________\n");
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 }

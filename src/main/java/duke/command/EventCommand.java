@@ -27,7 +27,7 @@ public class EventCommand extends Command {
      * @throws DukeException If task list fails to save
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Event newEvent;
         if (eventDesc.length == 2) {
             // Case: event <desc> /at <YYYY-MM-DD of event>
@@ -42,8 +42,8 @@ public class EventCommand extends Command {
                     LocalTime.parse(eventDesc[2]), LocalTime.parse(eventDesc[3]));
         }
         tasks.addToTaskList(newEvent);
-        ui.showSuccessMessage(newEvent.toString(), tasks.getTaskList().size());
         storage.save(tasks.getTaskList());
+        return ui.showSuccessMessage(newEvent.toString(), tasks.getTaskList().size());
     }
 
     /**

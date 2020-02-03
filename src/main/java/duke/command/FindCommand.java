@@ -23,10 +23,10 @@ public class FindCommand extends Command {
      * @param storage Current storage
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.getTaskList().isEmpty()) {
             // List is empty
-            ui.showEmptyListMessage();
+            return ui.showEmptyListMessage();
         } else {
             // List is NOT empty
             ArrayList<Task> taskList = tasks.getTaskList();
@@ -37,9 +37,9 @@ public class FindCommand extends Command {
                 }
             }
             if (isTimerOn) {
-                ui.showFindListTimerOn(listOfMatchingTasks);
+                return ui.showFindListTimerOn(listOfMatchingTasks);
             } else {
-                ui.showFindListTimerOff(listOfMatchingTasks);
+                return ui.showFindListTimerOff(listOfMatchingTasks);
             }
         }
     }

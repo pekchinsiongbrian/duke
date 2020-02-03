@@ -14,5 +14,5 @@ src/main/resources/docs/
 bin/
 
 *.jar
-
-/task-list.txt
+*.png
+*.jpg

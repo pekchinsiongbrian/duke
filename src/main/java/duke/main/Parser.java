@@ -18,11 +18,11 @@ public class Parser {
     private final String EVENT_USE = "Use: 1) event <desc> /at <YYYY-MM-DD of event>"
             + "\n2) event <desc> /at <YYYY-MM-DD of event> <start HH:mm>"
             + "\n3) event <desc> /at <YYYY-MM-DD of event> <start HH:mm> to <end HH:mm>"
-            + "\nNote: Input time in 24h format.";
+            + "\n\nNote: Input time in 24h format.";
 
     private final String DEADLINE_USE = "Use: 1) deadline <task> /by <YYYY-MM-DD of deadline>"
             + "\n2) deadline <task> /by <YYYY-MM-DD of deadline> <HH:mm>"
-            + "\nNote: Input time in 24h format.";
+            + "\n\nNote: Input time in 24h format.";
 
     private final String TODO_USE = "Use: todo <description>";
 

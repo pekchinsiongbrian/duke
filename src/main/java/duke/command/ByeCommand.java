@@ -19,9 +19,9 @@ public class ByeCommand extends Command {
      * @throws DukeException If task list fails to save
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showGoodbye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.save(tasks.getTaskList());
+        return ui.showGoodbye();
     }
 
     /**

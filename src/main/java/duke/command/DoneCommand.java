@@ -25,11 +25,11 @@ public class DoneCommand extends Command {
      * @throws DukeException If task list fails to save
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task doneTask = tasks.getTaskList().get(doneIndex - 1);
         doneTask.markAsDone();
-        ui.showDone(doneTask.toString());
         storage.save(tasks.getTaskList());
+        return ui.showDone(doneTask.toString());
     }
 
     /**

@@ -27,7 +27,7 @@ public class DeadlineCommand extends Command {
      * @throws DukeException If task list fails to save
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Deadline newDeadline;
         if (deadlineDesc.length == 2) {
             // Case: deadline <task> /by <YYYY-MM-DD of deadline>
@@ -38,8 +38,8 @@ public class DeadlineCommand extends Command {
                     LocalTime.parse(deadlineDesc[2]));
         }
         tasks.addToTaskList(newDeadline);
-        ui.showSuccessMessage(newDeadline.toString(), tasks.getTaskList().size());
         storage.save(tasks.getTaskList());
+        return ui.showSuccessMessage(newDeadline.toString(), tasks.getTaskList().size());
     }
 
     /**
