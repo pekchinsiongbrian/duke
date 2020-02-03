@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TodoTest {
     @Test
     public void setTestTodo() {
-        assertEquals("[T][" + "\u2718" +"] Play computer",
+        assertEquals("[T][X] Play computer",
                 new Todo("Play computer").toString());
     }
 }

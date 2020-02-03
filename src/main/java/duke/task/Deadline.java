@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Task object of type Deadline
+ */
 public class Deadline extends Task {
     protected LocalDate byDate;
     protected LocalTime byTime;
@@ -19,6 +22,11 @@ public class Deadline extends Task {
         this.byTime = byTime;
     }
 
+    /**
+     * Stringifies the Deadline object to a default string representation
+     *
+     * @return Default string representation of the Deadline object
+     */
     @Override
     public String toString() {
         if (this.byTime == null) {
@@ -31,6 +39,12 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Stringifies the Deadline object to a special string representation which includes the number of days to
+     * the deadline (if deadline has not passed), or the number of days since the deadline (if deadline has passed)
+     *
+     * @return Formatted string representation of the Deadline object
+     */
     public String displayDeadline() {
         try {
             if (this.byTime == null) {

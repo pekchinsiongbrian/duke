@@ -8,6 +8,9 @@ import java.util.Scanner;
 import duke.DukeException;
 import duke.task.Task;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     protected String filePath;
 
@@ -15,6 +18,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the contents of the task list into an array list of strings
+     *
+     * @return Array list of tasks (as strings) loaded from the task list
+     * @throws DukeException If task list does not exist or failed to load
+     */
     public ArrayList<String> load() throws DukeException {
         ArrayList<String> taskListInString = new ArrayList<>();
         try {
@@ -24,11 +33,17 @@ public class Storage {
                 taskListInString.add(sc.nextLine());
             }
         } catch (IOException ioe) {
-            throw new DukeException("Existing task list does not exist or failed to load.");
+            throw new DukeException("Task list does not exist or failed to load.");
         }
         return taskListInString;
     }
 
+    /**
+     * Saves the latest state of the task list
+     *
+     * @param list Task list
+     * @throws DukeException If failed to save the list
+     */
     public void save(ArrayList<Task> list) throws DukeException {
         File f = new File(this.filePath);
         try {

@@ -8,6 +8,9 @@ import duke.main.Storage;
 import duke.DukeException;
 import duke.task.Event;
 
+/**
+ * Command that is executed when user inputs 'event'
+ */
 public class EventCommand extends Command {
     private String[] eventDesc;
 
@@ -15,6 +18,14 @@ public class EventCommand extends Command {
         this.eventDesc = eventDesc;
     }
 
+    /**
+     * Executes the 'event' command
+     *
+     * @param tasks Task list
+     * @param ui Current user interface
+     * @param storage Current storage
+     * @throws DukeException If task list fails to save
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Event newEvent;
@@ -35,6 +46,11 @@ public class EventCommand extends Command {
         storage.save(tasks.getTaskList());
     }
 
+    /**
+     * Updates main function if it should exit the programme or not
+     *
+     * @return True if 'bye' command is called, false otherwise. In this case, false is returned.
+     */
     @Override
     public boolean isExit() {
         return false;

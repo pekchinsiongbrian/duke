@@ -8,6 +8,9 @@ import duke.main.Storage;
 import duke.DukeException;
 import duke.task.Deadline;
 
+/**
+ * Command that is executed when user inputs 'deadline'
+ */
 public class DeadlineCommand extends Command {
     private String[] deadlineDesc;
 
@@ -15,6 +18,14 @@ public class DeadlineCommand extends Command {
         this.deadlineDesc = deadlineDesc;
     }
 
+    /**
+     * Executes the 'deadline' command
+     *
+     * @param tasks Task list
+     * @param ui Current user interface
+     * @param storage Current storage
+     * @throws DukeException If task list fails to save
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Deadline newDeadline;
@@ -31,6 +42,11 @@ public class DeadlineCommand extends Command {
         storage.save(tasks.getTaskList());
     }
 
+    /**
+     * Updates main function if it should exit the programme or not
+     *
+     * @return True if 'bye' command is called, false otherwise. In this case, false is returned.
+     */
     @Override
     public boolean isExit() {
         return false;

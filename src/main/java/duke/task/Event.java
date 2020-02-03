@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Task object of type Event
+ */
 public class Event extends Task {
     protected LocalDate atDate;
     protected LocalTime atTimeStart;
@@ -27,6 +30,11 @@ public class Event extends Task {
         this.atTimeEnd = atTimeEnd;
     }
 
+    /**
+     * Stringifies the Event object to a default string representation
+     *
+     * @return Default string representation of the Event object
+     */
     @Override
     public String toString() {
         if (this.atTimeStart == null) {
@@ -46,6 +54,12 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Stringifies the Event object to a special string representation which includes the number of days to
+     * the event (if event has not passed), or the number of days since the event (if event has passed)
+     *
+     * @return Formatted string representation of the Event object
+     */
     public String displayEventTime() {
         try {
             if (this.atTimeStart == null) {

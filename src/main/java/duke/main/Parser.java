@@ -10,6 +10,9 @@ import duke.DukeException;
 import duke.command.*;
 import duke.task.*;
 
+/**
+ * Parses user commands
+ */
 public class Parser {
 
     private final String EVENT_USE = "Use: 1) event <desc> /at <YYYY-MM-DD of event>" +
@@ -31,6 +34,14 @@ public class Parser {
             "\n2) list /showtimer (displays list with timer toggled on)" +
             "\n3) list /hidetimer (displays list with timer toggled off)";
 
+    /**
+     * Checks the validity of the user input and returns the command type
+     *
+     * @param userInput User input
+     * @param list Task list
+     * @return Type of command
+     * @throws DukeException If user input (command and/or arguments) is invalid
+     */
     public String getCommandType(String userInput, TaskList list) throws DukeException {
         String[] userInputSplit = userInput.toLowerCase().split(" ");
         String firstWord = userInputSplit[0].toUpperCase();
@@ -138,6 +149,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Selects the command to execute based on the command type that is input
+     *
+     * @param commandType Type of command
+     * @param userInput User input
+     * @param isTimerOn Whether the user has set timer on or timer off
+     * @return Command
+     * @throws DukeException If command is invalid
+     */
     public Command selectCommand(String commandType, String userInput, boolean isTimerOn) throws DukeException {
         switch(commandType) {
             case "/HELP":
@@ -161,10 +181,23 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input and returns a to-do command if user input is valid
+     *
+     * @param userInput User input
+     * @return TodoCommand
+     */
     public TodoCommand parseTodoCommand(String userInput) {
         return new TodoCommand(userInput.substring(5));
     }
 
+    /**
+     * Parses user input and returns a deadline command if user input is valid
+     *
+     * @param userInput User input
+     * @return DeadlineCommand
+     * @throws DukeException If user input is invalid
+     */
     public DeadlineCommand parseDeadlineCommand(String userInput) throws DukeException {
         String desc = userInput.substring(9, userInput.toLowerCase().indexOf("/by") - 1);
         String by = userInput.substring(userInput.indexOf("/by") + 4);
@@ -189,6 +222,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input and returns an event command if user input is valid
+     *
+     * @param userInput User input
+     * @return EventCommand
+     * @throws DukeException If user input is invalid
+     */
     public EventCommand parseEventCommand(String userInput) throws DukeException {
         try {
             String desc = userInput.substring(6, userInput.toLowerCase().indexOf("/at") - 1);
@@ -224,6 +264,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input and returns a list command if user input is valid
+     *
+     * @param userInput User input
+     * @param isTimerOn Whether the user has set timer on or timer off
+     * @return ListCommand
+     */
     public ListCommand parseListCommand(String userInput, boolean isTimerOn) {
         String[] userInputSplit = userInput.toLowerCase().split(" ");
         if (userInputSplit.length == 2) {
@@ -233,16 +280,34 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input and returns a delete command if user input is valid
+     *
+     * @param userInput User input
+     * @return DeleteCommand
+     */
     public DeleteCommand parseDeleteCommand(String userInput) {
         String[] userInputSplit = userInput.toLowerCase().split(" ");
         return new DeleteCommand(Integer.parseInt(userInputSplit[1]));
     }
 
+    /**
+     * Parses user input and returns a done command if user input is valid
+     *
+     * @param userInput User input
+     * @return DoneCommand
+     */
     public DoneCommand parseDoneCommand(String userInput) {
         String[] userInputSplit = userInput.toLowerCase().split(" ");
         return new DoneCommand(Integer.parseInt(userInputSplit[1]));
     }
 
+    /**
+     * Converts the input list from strings to task objects
+     *
+     * @param list Task list
+     * @return Array list of task objects
+     */
     public ArrayList<Task> parseSavedFile(ArrayList<String> list) {
         ArrayList<Task> parsedList = new ArrayList<>();
         if (list.size() != 0) {
@@ -254,7 +319,7 @@ public class Parser {
                 switch (taskType) {
                     case "T":
                         parsedList.add(new Todo(description));
-                        if (status.equals("\u2713")) {
+                        if (status.equals("V")) {
                             parsedList.get(parsedList.size() - 1).markAsDone();
                         }
                         break;
@@ -272,7 +337,7 @@ public class Parser {
                                     LocalDate.parse(deadlineDateToParse, formatter).toString());
                             parsedList.add(new Deadline(description.substring(0, description.indexOf("(by:") - 1),
                                     deadlineDate));
-                            if (status.equals("\u2713")) {
+                            if (status.equals("V")) {
                                 parsedList.get(parsedList.size() - 1).markAsDone();
                             }
                             break;
@@ -284,7 +349,7 @@ public class Parser {
                                     byComponents[3].indexOf(")")));
                             parsedList.add(new Deadline(description.substring(0, description.indexOf("(by:") - 1),
                                     deadlineDate, deadlineTime));
-                            if (status.equals("\u2713")) {
+                            if (status.equals("V")) {
                                 parsedList.get(parsedList.size() - 1).markAsDone();
                             }
                             break;
@@ -305,7 +370,7 @@ public class Parser {
                                     LocalDate.parse(eventDateToParse, formatter).toString());
                             parsedList.add(new Event(description.substring(0, description.indexOf("(at:") - 1),
                                     eventDate));
-                            if (status.equals("\u2713")) {
+                            if (status.equals("V")) {
                                 parsedList.get(parsedList.size() - 1).markAsDone();
                             }
                             break;
@@ -317,7 +382,7 @@ public class Parser {
                                     atComponents[3].indexOf(")")));
                             parsedList.add(new Event(description.substring(0, description.indexOf("(at:") - 1),
                                     eventDate, eventTime));
-                            if (status.equals("\u2713")) {
+                            if (status.equals("V")) {
                                 parsedList.get(parsedList.size() - 1).markAsDone();
                             }
                             break;
@@ -330,7 +395,7 @@ public class Parser {
                                     atComponents[5].indexOf(")")));
                             parsedList.add(new Event(description.substring(0, description.indexOf("(at:") - 1),
                                     eventDate, eventTimeStart, eventTimeEnd));
-                            if (status.equals("\u2713")) {
+                            if (status.equals("V")) {
                                 parsedList.get(parsedList.size() - 1).markAsDone();
                             }
                             break;
