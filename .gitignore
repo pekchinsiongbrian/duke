@@ -15,4 +15,4 @@ bin/
 
 *.jar
 
-task-list.txt
+/task-list.txt
