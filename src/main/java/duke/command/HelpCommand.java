@@ -18,8 +18,8 @@ public class HelpCommand extends Command {
      * @param storage Current storage
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showHelp();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showHelp();
     }
 
     /**

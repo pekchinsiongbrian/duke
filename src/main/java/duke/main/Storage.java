@@ -33,7 +33,7 @@ public class Storage {
                 taskListInString.add(sc.nextLine());
             }
         } catch (IOException ioe) {
-            throw new DukeException("Task list does not exist or failed to load.");
+            throw new DukeException("Task list does not exist, has been moved, or failed to load.");
         }
         return taskListInString;
     }

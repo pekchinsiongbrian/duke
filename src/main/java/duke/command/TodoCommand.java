@@ -25,11 +25,11 @@ public class TodoCommand extends Command {
      * @throws DukeException If task list fails to save
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Todo newTodo = new Todo(todoDesc);
         tasks.addToTaskList(newTodo);
-        ui.showSuccessMessage(newTodo.toString(), tasks.getTaskList().size());
         storage.save(tasks.getTaskList());
+        return ui.showSuccessMessage(newTodo.toString(), tasks.getTaskList().size());
     }
 
     /**
