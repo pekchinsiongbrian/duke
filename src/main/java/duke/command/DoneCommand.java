@@ -7,7 +7,7 @@ import duke.DukeException;
 import duke.task.Task;
 
 /**
- * Command that is executed when user inputs 'done'
+ * Command that is executed when user inputs 'done'.
  */
 public class DoneCommand extends Command {
     private int doneIndex;
@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the 'done' command
+     * Executes the 'done' command.
      *
      * @param tasks Task list
      * @param ui Current user interface
@@ -33,7 +33,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Updates main function if it should exit the programme or not
+     * Updates main function if it should exit the programme or not.
      *
      * @return True if 'bye' command is called, false otherwise. In this case, false is returned.
      */

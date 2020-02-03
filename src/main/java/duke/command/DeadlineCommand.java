@@ -9,7 +9,7 @@ import duke.DukeException;
 import duke.task.Deadline;
 
 /**
- * Command that is executed when user inputs 'deadline'
+ * Command that is executed when user inputs 'deadline'.
  */
 public class DeadlineCommand extends Command {
     private String[] deadlineDesc;
@@ -19,7 +19,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Executes the 'deadline' command
+     * Executes the 'deadline' command.
      *
      * @param tasks Task list
      * @param ui Current user interface
@@ -43,7 +43,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Updates main function if it should exit the programme or not
+     * Updates main function if it should exit the programme or not.
      *
      * @return True if 'bye' command is called, false otherwise. In this case, false is returned.
      */

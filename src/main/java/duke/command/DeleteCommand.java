@@ -7,7 +7,7 @@ import duke.main.Storage;
 import duke.task.Task;
 
 /**
- * Command that is executed when user inputs 'delete'
+ * Command that is executed when user inputs 'delete'.
  */
 public class DeleteCommand extends Command {
     private int deleteIndex;
@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the 'delete' command
+     * Executes the 'delete' command.
      *
      * @param tasks Task list
      * @param ui Current user interface
@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Updates main function if it should exit the programme or not
+     * Updates main function if it should exit the programme or not.
      *
      * @return True if 'bye' command is called, false otherwise. In this case, false is returned.
      */

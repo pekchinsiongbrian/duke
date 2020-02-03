@@ -6,12 +6,12 @@ import duke.main.Storage;
 import duke.DukeException;
 
 /**
- * Command that is executed when user inputs 'bye'
+ * Command that is executed when user inputs 'bye'.
  */
 public class ByeCommand extends Command {
 
     /**
-     * Executes the 'bye' command
+     * Executes the 'bye' command.
      *
      * @param tasks Task list
      * @param ui Current user interface
@@ -19,13 +19,13 @@ public class ByeCommand extends Command {
      * @throws DukeException If task list fails to save
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.showGoodbye();
         storage.save(tasks.getTaskList());
     }
 
     /**
-     * Updates main function if it should exit the programme or not
+     * Updates main function if it should exit the programme or not.
      *
      * @return True if 'bye' command is called, false otherwise. In this case, true is returned.
      */

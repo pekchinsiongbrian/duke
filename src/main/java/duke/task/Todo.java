@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Task object of type To-do
+ * Task object of type To-do.
  */
 public class Todo extends Task {
     public Todo(String description) {
@@ -9,7 +9,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Stringifies the To-do object to a default string representation
+     * Stringifies the To-do object to a default string representation.
      *
      * @return Default string representation of the To-do object
      */

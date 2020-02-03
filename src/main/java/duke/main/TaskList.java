@@ -18,7 +18,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the task list
+     * Adds a task to the task list.
      *
      * @param t Task to be added
      */
@@ -27,7 +27,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from the task list
+     * Deletes a task from the task list.
      *
      * @param index Index of the item in the task list to be deleted
      */
@@ -36,7 +36,7 @@ public class TaskList {
     }
 
     /**
-     * Gets the task list
+     * Gets the task list.
      *
      * @return Array list of tasks
      */

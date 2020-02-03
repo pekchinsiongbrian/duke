@@ -9,7 +9,7 @@ import duke.DukeException;
 import duke.task.Event;
 
 /**
- * Command that is executed when user inputs 'event'
+ * Command that is executed when user inputs 'event'.
  */
 public class EventCommand extends Command {
     private String[] eventDesc;
@@ -19,7 +19,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Executes the 'event' command
+     * Executes the 'event' command.
      *
      * @param tasks Task list
      * @param ui Current user interface
@@ -47,7 +47,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Updates main function if it should exit the programme or not
+     * Updates main function if it should exit the programme or not.
      *
      * @return True if 'bye' command is called, false otherwise. In this case, false is returned.
      */

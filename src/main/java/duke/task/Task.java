@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Parent Task class
+ * Parent Task class.
  */
 public class Task {
     protected String description;
@@ -13,7 +13,7 @@ public class Task {
     }
 
     /**
-     * Gets the status icon
+     * Gets the status icon.
      *
      * @return Tick (V) if done, cross (X) if not done
      */
@@ -22,14 +22,14 @@ public class Task {
     }
 
     /**
-     * Marks a task as done by changing its isDone status
+     * Marks a task as done by changing its isDone status.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Gets the status of the task
+     * Gets the status of the task.
      *
      * @return Status of the task
      */
@@ -38,7 +38,7 @@ public class Task {
     }
 
     /**
-     * Stringifies the Task object to a default string representation
+     * Stringifies the Task object to a default string representation.
      *
      * @return Default string representation of a Task
      */

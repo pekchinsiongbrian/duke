@@ -6,7 +6,7 @@ import duke.main.Storage;
 import duke.DukeException;
 
 /**
- * Command that is executed when user inputs 'list'
+ * Command that is executed when user inputs 'list'.
  */
 public class ListCommand extends Command {
     private String listCommand;
@@ -18,12 +18,11 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Executes the 'list' command
+     * Executes the 'list' command.
      *
      * @param tasks Task list
      * @param ui Current user interface
      * @param storage Current storage
-     * @throws DukeException If task list fails to save
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
@@ -57,7 +56,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Updates main function if it should exit the programme or not
+     * Updates main function if it should exit the programme or not.
      *
      * @return True if 'bye' command is called, false otherwise. In this case, false is returned.
      */

@@ -7,7 +7,7 @@ import duke.main.Storage;
 import duke.DukeException;
 
 /**
- * Command that is executed when user inputs 'todo'
+ * Command that is executed when user inputs 'to-do'.
  */
 public class TodoCommand extends Command {
     String todoDesc;
@@ -17,7 +17,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Executes the 'to-do' command
+     * Executes the 'to-do' command.
      *
      * @param tasks Task list
      * @param ui Current user interface
@@ -25,7 +25,7 @@ public class TodoCommand extends Command {
      * @throws DukeException If task list fails to save
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Todo newTodo = new Todo(todoDesc);
         tasks.addToTaskList(newTodo);
         ui.showSuccessMessage(newTodo.toString(), tasks.getTaskList().size());
@@ -33,7 +33,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Updates main function if it should exit the programme or not
+     * Updates main function if it should exit the programme or not.
      *
      * @return True if 'bye' command is called, false otherwise. In this case, false is returned.
      */

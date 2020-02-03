@@ -9,7 +9,7 @@ import duke.DukeException;
 import duke.task.Task;
 
 /**
- * Deals with loading tasks from the file and saving tasks in the file
+ * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
     protected String filePath;
@@ -19,7 +19,7 @@ public class Storage {
     }
 
     /**
-     * Loads the contents of the task list into an array list of strings
+     * Loads the contents of the task list into an array list of strings.
      *
      * @return Array list of tasks (as strings) loaded from the task list
      * @throws DukeException If task list does not exist or failed to load
@@ -29,7 +29,7 @@ public class Storage {
         try {
             File f = new File(this.filePath);
             Scanner sc = new Scanner(f);
-            while(sc.hasNextLine()) {
+            while (sc.hasNextLine()) {
                 taskListInString.add(sc.nextLine());
             }
         } catch (IOException ioe) {
@@ -39,7 +39,7 @@ public class Storage {
     }
 
     /**
-     * Saves the latest state of the task list
+     * Saves the latest state of the task list.
      *
      * @param list Task list
      * @throws DukeException If failed to save the list
