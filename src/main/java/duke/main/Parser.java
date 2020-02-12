@@ -100,15 +100,17 @@ public class Parser {
             //Fallthrough
         case "DONE":
             // Guard condition
-            if (userInputSplit.length != 2) {
+            if (userInputSplit.length == 1) {
                 throw new DukeException("Enter index of item to mark it as done. "
                         + "Type 'list' to see all items.\n\n" + DONE_USE);
             } else {
                 try {
-                    if (Integer.parseInt(userInputSplit[1]) <= 0) {
-                        throw new DukeException("Argument must be a positive integer.\n\n" + DONE_USE);
-                    } else if (Integer.parseInt(userInputSplit[1]) > list.getTaskList().size()) {
-                        throw new DukeException("Argument exceeds number of items on the list!\n\n" + DONE_USE);
+                    for (int i = 1; i < userInputSplit.length; i++) {
+                        if (Integer.parseInt(userInputSplit[i]) <= 0) {
+                            throw new DukeException("Argument must be a positive integer.\n\n" + DONE_USE);
+                        } else if (Integer.parseInt(userInputSplit[i]) > list.getTaskList().size()) {
+                            throw new DukeException("Argument exceeds number of items on the list!\n\n" + DONE_USE);
+                        }
                     }
                 } catch (NumberFormatException e) {
                     throw new DukeException("Argument must be a positive integer.\n\n" + DONE_USE);
@@ -118,15 +120,17 @@ public class Parser {
             //Fallthrough
         case "DELETE":
             // Guard condition
-            if (userInputSplit.length != 2) {
+            if (userInputSplit.length == 1) {
                 throw new DukeException("Enter index of item to delete it. "
                         + "Type 'list' to see all items.\n\n" + DELETE_USE);
             } else {
                 try {
-                    if (Integer.parseInt(userInputSplit[1]) <= 0) {
-                        throw new DukeException("Argument must be a positive integer.\n\n" + DELETE_USE);
-                    } else if (Integer.parseInt(userInputSplit[1]) > list.getTaskList().size()) {
-                        throw new DukeException("Argument exceeds number of items on the list!\n\n" + DELETE_USE);
+                    for (int i = 1; i < userInputSplit.length; i++) {
+                        if (Integer.parseInt(userInputSplit[i]) <= 0) {
+                            throw new DukeException("Argument must be a positive integer.\n\n" + DELETE_USE);
+                        } else if (Integer.parseInt(userInputSplit[i]) > list.getTaskList().size()) {
+                            throw new DukeException("Argument exceeds number of items on the list!\n\n" + DELETE_USE);
+                        }
                     }
                 } catch (NumberFormatException e) {
                     throw new DukeException("Argument must be a positive integer.\n\n" + DELETE_USE);
@@ -319,8 +323,12 @@ public class Parser {
      */
     public DeleteCommand parseDeleteCommand(String userInput) {
         String[] userInputSplit = userInput.toLowerCase().split(" ");
-        assert userInputSplit.length == 2 : "Invalid use of delete command";
-        return new DeleteCommand(Integer.parseInt(userInputSplit[1]));
+        assert userInputSplit.length >= 2 : "Invalid use of delete command";
+        int[] deleteIndices = new int[userInputSplit.length - 1];
+        for (int i = 0; i < userInputSplit.length - 1; i++) {
+            deleteIndices[i] = Integer.parseInt(userInputSplit[i + 1]);
+        }
+        return new DeleteCommand(deleteIndices);
     }
 
     /**
@@ -331,8 +339,12 @@ public class Parser {
      */
     public DoneCommand parseDoneCommand(String userInput) {
         String[] userInputSplit = userInput.toLowerCase().split(" ");
-        assert userInputSplit.length == 2 : "Invalid use of done command";
-        return new DoneCommand(Integer.parseInt(userInputSplit[1]));
+        assert userInputSplit.length >= 2 : "Invalid use of done command";
+        int[] doneIndices = new int[userInputSplit.length - 1];
+        for (int i = 0; i < userInputSplit.length - 1; i++) {
+            doneIndices[i] = Integer.parseInt(userInputSplit[i + 1]);
+        }
+        return new DoneCommand(doneIndices);
     }
 
     /**

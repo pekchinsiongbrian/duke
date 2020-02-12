@@ -5,15 +5,19 @@ import duke.main.TaskList;
 import duke.main.Ui;
 import duke.main.Storage;
 import duke.task.Task;
+import java.util.Arrays;
 
 /**
  * Command that is executed when user inputs 'delete'.
  */
 public class DeleteCommand extends Command {
-    private int deleteIndex;
+    private int[] deleteIndices;
 
-    public DeleteCommand(int deleteIndex) {
-        this.deleteIndex = deleteIndex;
+    public DeleteCommand(int[] deleteIndices) {
+        this.deleteIndices = Arrays.stream(deleteIndices)
+                .distinct()
+                .sorted()
+                .toArray();
     }
 
     /**
@@ -27,10 +31,15 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task toDelete = tasks.getTaskList().get(deleteIndex - 1);
-        tasks.deleteFromTaskList(deleteIndex - 1);
-        storage.save(tasks.getTaskList());
-        return ui.showDelete(toDelete.toString(), tasks.getTaskList().size());
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < deleteIndices.length; i++) {
+            sb.append("\n");
+            Task deletedTask = tasks.getTaskList().get(deleteIndices[i] - i -1);
+            tasks.deleteFromTaskList(deleteIndices[i] - i - 1);
+            storage.save(tasks.getTaskList());
+            sb.append(deletedTask.toString());
+        }
+        return ui.showDelete(sb.toString(), tasks.getTaskList().size(), deleteIndices.length);
     }
 
     /**

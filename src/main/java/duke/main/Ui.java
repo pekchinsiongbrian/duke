@@ -40,11 +40,17 @@ public class Ui {
     /**
      * Generates this message after a task is marked as done.
      *
-     * @param task Name of task to be marked as done
+     * @param task Name of task(s) to be marked as done
+     * @param numOfDone Number of tasks to be marked as done
      * @return String representation of success message after task is marked as done
      */
-    public String showDone(String task) {
-        return "Nice! I've marked this task as done:\n\t" + task;
+    public String showDone(String task, int numOfDone) {
+        assert numOfDone > 0 : "Invalid use of done command";
+        if (numOfDone == 1) {
+            return "Nice! I've marked this task as done:\t" + task;
+        } else {
+            return "Nice! I've marked these tasks as done:\t" + task;
+        }
     }
 
     /**
@@ -52,11 +58,17 @@ public class Ui {
      *
      * @param task Name of task to be deleted
      * @param sizeOfList Size of the task list after deletion
+     * @param numOfDelete Number of tasks to be deleted
      * @return String representation of success message after task is deleted
      */
-    public String showDelete(String task, int sizeOfList) {
-        return "Noted. I've removed this task:\n\t" + task
-                + "\nNow you have " + sizeOfList + " tasks in the list.";
+    public String showDelete(String task, int sizeOfList, int numOfDelete) {
+        if (numOfDelete == 1) {
+            return "Noted. I've removed this task:\t" + task +
+                    "\nNow you have " + sizeOfList + " tasks in the list.";
+        } else {
+            return "Noted. I've removed these tasks:\t" + task +
+                    "\nNow you have " + sizeOfList + " tasks in the list.";
+        }
     }
 
     /**

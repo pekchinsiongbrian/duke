@@ -5,15 +5,19 @@ import duke.main.Ui;
 import duke.main.Storage;
 import duke.DukeException;
 import duke.task.Task;
+import java.util.Arrays;
 
 /**
  * Command that is executed when user inputs 'done'.
  */
 public class DoneCommand extends Command {
-    private int doneIndex;
+    private int[] doneIndices;
 
-    public DoneCommand(int doneIndex) {
-        this.doneIndex = doneIndex;
+    public DoneCommand(int[] doneIndices) {
+        this.doneIndices = Arrays.stream(doneIndices)
+                .distinct()
+                .sorted()
+                .toArray();
     }
 
     /**
@@ -27,10 +31,15 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task doneTask = tasks.getTaskList().get(doneIndex - 1);
-        doneTask.markAsDone();
-        storage.save(tasks.getTaskList());
-        return ui.showDone(doneTask.toString());
+        StringBuilder sb = new StringBuilder();
+        for (int index : doneIndices) {
+            sb.append("\n");
+            Task doneTask = tasks.getTaskList().get(index - 1);
+            doneTask.markAsDone();
+            storage.save(tasks.getTaskList());
+            sb.append(doneTask.toString());
+        }
+        return ui.showDone(sb.toString(), doneIndices.length);
     }
 
     /**
