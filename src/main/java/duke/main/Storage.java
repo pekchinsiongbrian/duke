@@ -27,7 +27,7 @@ public class Storage {
     public ArrayList<String> load() throws DukeException {
         ArrayList<String> taskListInString = new ArrayList<>();
         try {
-            File f = new File(this.filePath);
+            File f = new File(filePath);
             Scanner sc = new Scanner(f);
             while (sc.hasNextLine()) {
                 taskListInString.add(sc.nextLine());
@@ -45,8 +45,8 @@ public class Storage {
      * @throws DukeException If failed to save the list
      */
     public void save(ArrayList<Task> list) throws DukeException {
-        File f = new File(this.filePath);
         try {
+            File f = new File(filePath);
             FileOutputStream outputStream = new FileOutputStream(f);
             for (Task task : list) {
                 String toWrite = task.toString() + "\n";

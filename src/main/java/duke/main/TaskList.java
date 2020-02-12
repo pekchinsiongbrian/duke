@@ -7,14 +7,14 @@ import java.util.ArrayList;
  * Contains the task list. Has operations to add and delete tasks in the list.
  */
 public class TaskList {
-    protected ArrayList<Task> taskList;
+    protected ArrayList<Task> tasks;
 
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     public TaskList(ArrayList<String> list, Parser parser) {
-        this.taskList = parser.parseSavedFile(list);
+        this.tasks = parser.parseSavedFile(list);
     }
 
     /**
@@ -23,7 +23,7 @@ public class TaskList {
      * @param t Task to be added
      */
     public void addToTaskList(Task t) {
-        this.taskList.add(t);
+        tasks.add(t);
     }
 
     /**
@@ -32,7 +32,7 @@ public class TaskList {
      * @param index Index of the item in the task list to be deleted
      */
     public void deleteFromTaskList(int index) {
-        this.taskList.remove(index);
+        tasks.remove(index);
     }
 
     /**
@@ -41,6 +41,6 @@ public class TaskList {
      * @return Array list of tasks
      */
     public ArrayList<Task> getTaskList() {
-        return this.taskList;
+        return tasks;
     }
 }

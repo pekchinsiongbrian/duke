@@ -49,20 +49,21 @@ public class Parser {
         String firstWord = userInputSplit[0].toUpperCase();
         switch (firstWord) {
         case "/HELP":
+            // Guard condition
             if (userInputSplit.length > 1) {
                 throw new DukeException("'/help' command has no arguments!");
-            } else {
-                return firstWord;
             }
+            return firstWord;
             //Fallthrough
         case "TODO":
+            // Guard condition
             if (userInputSplit.length == 1) {
                 throw new DukeException(TODO_USE);
-            } else {
-                return firstWord;
             }
+            return firstWord;
             //Fallthrough
         case "DEADLINE":
+            // Guard condition
             if (userInputSplit.length == 1) {
                 throw new DukeException(DEADLINE_USE);
             } else if (!userInput.toLowerCase().contains("/by")) {
@@ -76,11 +77,11 @@ public class Parser {
             } else if (Arrays.asList(userInputSplit).indexOf("/by")
                     != Arrays.asList(userInputSplit).lastIndexOf("/by")) {
                 throw new DukeException("Only one '/by' keyword can be used!\n\n" + DEADLINE_USE);
-            } else {
-                return firstWord;
             }
+            return firstWord;
             //Fallthrough
         case "EVENT":
+            // Guard condition
             if (userInputSplit.length == 1) {
                 throw new DukeException(EVENT_USE);
             } else if (!userInput.toLowerCase().contains("/at")) {
@@ -94,11 +95,11 @@ public class Parser {
             } else if (Arrays.asList(userInputSplit).indexOf("/at")
                     != Arrays.asList(userInputSplit).lastIndexOf("/at")) {
                 throw new DukeException("Only one '/at' keyword can be used!\n\n" + EVENT_USE);
-            } else {
-                return firstWord;
             }
+            return firstWord;
             //Fallthrough
         case "DONE":
+            // Guard condition
             if (userInputSplit.length != 2) {
                 throw new DukeException("Enter index of item to mark it as done. "
                         + "Type 'list' to see all items.\n\n" + DONE_USE);
@@ -108,15 +109,15 @@ public class Parser {
                         throw new DukeException("Argument must be a positive integer.\n\n" + DONE_USE);
                     } else if (Integer.parseInt(userInputSplit[1]) > list.getTaskList().size()) {
                         throw new DukeException("Argument exceeds number of items on the list!\n\n" + DONE_USE);
-                    } else {
-                        return firstWord;
                     }
                 } catch (NumberFormatException e) {
                     throw new DukeException("Argument must be a positive integer.\n\n" + DONE_USE);
                 }
             }
+            return firstWord;
             //Fallthrough
         case "DELETE":
+            // Guard condition
             if (userInputSplit.length != 2) {
                 throw new DukeException("Enter index of item to delete it. "
                         + "Type 'list' to see all items.\n\n" + DELETE_USE);
@@ -126,40 +127,37 @@ public class Parser {
                         throw new DukeException("Argument must be a positive integer.\n\n" + DELETE_USE);
                     } else if (Integer.parseInt(userInputSplit[1]) > list.getTaskList().size()) {
                         throw new DukeException("Argument exceeds number of items on the list!\n\n" + DELETE_USE);
-                    } else {
-                        return firstWord;
                     }
                 } catch (NumberFormatException e) {
                     throw new DukeException("Argument must be a positive integer.\n\n" + DELETE_USE);
                 }
             }
+            return firstWord;
             //Fallthrough
         case "LIST":
+            // Guard condition
             if (userInputSplit.length > 2) {
                 throw new DukeException(LIST_USE);
             } else if (userInputSplit.length == 2) {
                 if (!userInputSplit[1].equals("/showtimer") && !userInputSplit[1].equals("/hidetimer")) {
                     throw new DukeException(LIST_USE);
-                } else {
-                    return firstWord;
                 }
-            } else {
-                return firstWord;
             }
+            return firstWord;
             //Fallthrough
         case "BYE":
+            // Guard condition
             if (userInputSplit.length > 1) {
                 throw new DukeException("'bye' command has no arguments!");
-            } else {
-                return firstWord;
             }
+            return firstWord;
             //Fallthrough
         case "FIND":
+            // Guard condition
             if (userInputSplit.length == 1) {
                 throw new DukeException("Enter a keyword to search!\n" + FIND_USE);
-            } else {
-                return firstWord;
             }
+            return firstWord;
             //Fallthrough
         default:
             throw new DukeException("Invalid command!\nFor list of commands, type: /help");
@@ -274,7 +272,7 @@ public class Parser {
             } else if (atComponents.length == 4) {
                 // Case: event <desc> /at <YYYY-MM-DD of event> <start HH:mm> to <end HH:mm>
                 if (!atComponents[2].toLowerCase().equals("to")) {
-                    // Check if the 'to' keyword is used
+                    // Checks if the 'to' keyword is used
                     throw new DukeException(EVENT_USE);
                 } else {
                     LocalDate.parse(atComponents[0]);
@@ -300,8 +298,10 @@ public class Parser {
     public ListCommand parseListCommand(String userInput, boolean isTimerOn) {
         String[] userInputSplit = userInput.toLowerCase().split(" ");
         if (userInputSplit.length == 2) {
+            // Case: 'list /showtimer' or 'list /hidetimer'
             return new ListCommand(userInputSplit[1], isTimerOn);
         } else {
+            // Case: 'list' (no arguments)
             return new ListCommand("", isTimerOn);
         }
     }

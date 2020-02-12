@@ -46,7 +46,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Creates dialog boxes, one displaying the user input and the other containing Duke's reply
      * and then appends them to the dialog container. Clears the user input after processing.
-     * If the user inputs the 'bye' command, application will shut down after 2.5 seconds.
+     * If the user inputs the 'bye' command, application will shut down after 2 seconds.
      */
     @FXML
     private void handleUserInput() {
@@ -58,7 +58,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        PauseTransition delay = new PauseTransition(Duration.seconds(2.5));
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
         if (duke.getExitStatus()) {
             delay.setOnFinished(event -> Main.closeWindow());
             delay.play();

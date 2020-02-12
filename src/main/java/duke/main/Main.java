@@ -13,8 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private final String FILE_PATH = System.getProperty("user.home")
-            + "/Downloads/Y2S2/CS2103T - Software Engineering/duke-master/task-list.txt";
+    private final String FILE_PATH = System.getProperty("user.dir") + "/task-list.txt";
     private Duke duke = new Duke(FILE_PATH);
     private static Stage stg;
 
