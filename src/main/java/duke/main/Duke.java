@@ -44,6 +44,7 @@ public class Duke {//extends Application {
         } catch (DukeException e) {
             response = ui.showError(e.getMessage());
         }
+        assert !response.equals("") : "Empty response";
         return response;
     }
 

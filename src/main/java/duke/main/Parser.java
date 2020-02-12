@@ -216,6 +216,8 @@ public class Parser {
      * @return TodoCommand
      */
     public TodoCommand parseTodoCommand(String userInput) {
+        assert userInput.length() >= 5 && userInput.split(" ").length >= 2 :
+                "Invalid use of todo command";
         return new TodoCommand(userInput.substring(5));
     }
 
@@ -299,9 +301,12 @@ public class Parser {
         String[] userInputSplit = userInput.toLowerCase().split(" ");
         if (userInputSplit.length == 2) {
             // Case: 'list /showtimer' or 'list /hidetimer'
+            assert userInputSplit[1].equals("/showtimer") || userInputSplit[1].equals("/hidetimer") :
+                    "Invalid argument";
             return new ListCommand(userInputSplit[1], isTimerOn);
         } else {
             // Case: 'list' (no arguments)
+            assert userInputSplit.length == 1 : "Invalid use of list command";
             return new ListCommand("", isTimerOn);
         }
     }
@@ -314,6 +319,7 @@ public class Parser {
      */
     public DeleteCommand parseDeleteCommand(String userInput) {
         String[] userInputSplit = userInput.toLowerCase().split(" ");
+        assert userInputSplit.length == 2 : "Invalid use of delete command";
         return new DeleteCommand(Integer.parseInt(userInputSplit[1]));
     }
 
@@ -325,6 +331,7 @@ public class Parser {
      */
     public DoneCommand parseDoneCommand(String userInput) {
         String[] userInputSplit = userInput.toLowerCase().split(" ");
+        assert userInputSplit.length == 2 : "Invalid use of done command";
         return new DoneCommand(Integer.parseInt(userInputSplit[1]));
     }
 
@@ -336,6 +343,8 @@ public class Parser {
      * @return FindCommand
      */
     public FindCommand parseFindCommand(String userInput, boolean isTimerOn) {
+        assert userInput.length() >= 5 && userInput.split(" ").length >= 2 :
+                "Invalid use of find command";
         return new FindCommand(userInput.substring(5), isTimerOn);
     }
 
