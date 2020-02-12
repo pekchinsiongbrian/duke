@@ -62,6 +62,7 @@ public class Ui {
      * @return String representation of success message after task is deleted
      */
     public String showDelete(String task, int sizeOfList, int numOfDelete) {
+        assert numOfDelete > 0 : "Invalid use of delete command";
         if (numOfDelete == 1) {
             return "Noted. I've removed this task:\t" + task +
                     "\nNow you have " + sizeOfList + " tasks in the list.";
