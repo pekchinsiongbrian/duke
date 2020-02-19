@@ -1,7 +1,8 @@
 package duke.main;
 
 import duke.DukeException;
-import duke.command.*;
+import duke.command.Command;
+import duke.command.ListCommand;
 
 /**
  * Main class of the duke programme.

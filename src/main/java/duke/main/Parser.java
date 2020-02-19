@@ -7,8 +7,20 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import duke.DukeException;
-import duke.command.*;
-import duke.task.*;
+import duke.command.Command;
+import duke.command.ByeCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+import duke.task.Task;
 
 /**
  * Parses user commands.
@@ -26,9 +38,11 @@ public class Parser {
 
     private final String TODO_USE = "Use: todo <description>";
 
-    private final String DONE_USE = "Use:\ndone <index of item to mark as done>";
+    private final String DONE_USE = "Use:\ndone <indices of item(s) to mark as done>"
+            + "\n\nIf using multiple indices, separate them with a space!";
 
-    private final String DELETE_USE = "Use:\ndelete <index of item to delete>";
+    private final String DELETE_USE = "Use:\ndelete <indices of item(s) to delete>"
+            + "\n\nIf using multiple indices, separate them with a space!";
 
     private final String LIST_USE = "Use:\n1) list (displays list with current settings)"
             + "\n2) list /showtimer (displays list with timer toggled on)"
