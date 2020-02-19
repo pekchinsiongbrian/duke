@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < deleteIndices.length; i++) {
             sb.append("\n");
-            Task deletedTask = tasks.getTaskList().get(deleteIndices[i] - i -1);
+            Task deletedTask = tasks.getTaskList().get(deleteIndices[i] - i - 1);
             tasks.deleteFromTaskList(deleteIndices[i] - i - 1);
             storage.save(tasks.getTaskList());
             sb.append(deletedTask.toString());

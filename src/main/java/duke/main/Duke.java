@@ -5,9 +5,9 @@ import duke.command.Command;
 import duke.command.ListCommand;
 
 /**
- * Main class of the duke programme.
+ * Main class of the duke programme (aka Brian-bot).
  */
-public class Duke {//extends Application {
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -32,6 +32,12 @@ public class Duke {//extends Application {
         }
     }
 
+    /**
+     * Retrieves the appropriate response that the bot should give based on the user's input.
+     *
+     * @param userInput User input
+     * @return String representation of the response that the bot gives
+     */
     public String getResponse(String userInput) {
         String response;
         try {

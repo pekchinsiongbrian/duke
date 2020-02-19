@@ -66,11 +66,11 @@ public class Ui {
     public String showDelete(String task, int sizeOfList, int numOfDelete) {
         assert numOfDelete > 0 : "Invalid use of delete command";
         if (numOfDelete == 1) {
-            return "Noted. I've removed this task:\t" + task +
-                    "\nNow you have " + sizeOfList + " tasks in the list.";
+            return "Noted. I've removed this task:\t" + task
+                    + "\nNow you have " + sizeOfList + " tasks in the list.";
         } else {
-            return "Noted. I've removed these tasks:\t" + task +
-                    "\nNow you have " + sizeOfList + " tasks in the list.";
+            return "Noted. I've removed these tasks:\t" + task
+                    + "\nNow you have " + sizeOfList + " tasks in the list.";
         }
     }
 
@@ -139,8 +139,7 @@ public class Ui {
         sb.append("Here are the matching tasks in your list:");
         if (list.isEmpty()) {
             sb.append("\n\tNo matches found!");
-        }
-        else {
+        } else {
             String toAppend;
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i) instanceof Deadline) {
