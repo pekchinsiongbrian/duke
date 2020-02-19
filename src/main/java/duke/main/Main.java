@@ -26,7 +26,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Duke");
+            stage.setTitle("Brian-bot");
             stage.getIcons().add(new Image("/images/Bill Gates.jpg"));
             stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
