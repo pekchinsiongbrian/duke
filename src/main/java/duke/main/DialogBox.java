@@ -39,9 +39,9 @@ public class DialogBox extends HBox {
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
         if (sender.equals(Sender.DUKE)) {
-            this.setStyle("-fx-background-color:POWDERBLUE");
+            this.setStyle("-fx-background-color:#B1C0CF");
         } else {
-            this.setStyle("-fx-background-color:PINK");
+            this.setStyle("-fx-background-color:#D4D5D5");
         }
         this.setPadding(new Insets(0, 10, 0, 10));
     }
