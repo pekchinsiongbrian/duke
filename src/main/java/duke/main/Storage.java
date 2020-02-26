@@ -15,7 +15,8 @@ public class Storage {
     protected String filePath;
 
     public Storage(String filePath) {
-        assert filePath.equals(System.getProperty("user.dir") + "/task-list.txt") : "Wrong file path";
+        assert filePath.equals(System.getProperty("user.dir") + "/src/main/resources/task-list.txt")
+                : "Wrong file path";
         this.filePath = filePath;
     }
 
