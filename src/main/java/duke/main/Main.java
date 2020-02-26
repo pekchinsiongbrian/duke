@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private final String FILE_PATH = System.getProperty("user.dir") + "/task-list.txt";
+    private final String FILE_PATH = System.getProperty("user.dir") + "/src/main/resources/task-list.txt";
     private Duke duke = new Duke(FILE_PATH);
     private static Stage stg;
 
